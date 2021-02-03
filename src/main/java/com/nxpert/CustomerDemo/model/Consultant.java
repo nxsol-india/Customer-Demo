@@ -5,9 +5,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -28,8 +31,13 @@ public class Consultant {
 	String name;
 
 	@ManyToMany(targetEntity = Customer.class, 
-				cascade = CascadeType.ALL,
-				mappedBy = "consultants")
+			fetch = FetchType.EAGER,
+	        cascade = {CascadeType.MERGE})
+	@JoinTable(name = "customerbyconsultants", 
+				joinColumns = {
+								@JoinColumn(name = "consultants_id") 
+							  }, inverseJoinColumns = { @JoinColumn(name = "customer_id") }
+			  )
 	List<Customer> customers;
 
 	public List<Customer> getCustomers() {
