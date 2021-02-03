@@ -1,24 +1,25 @@
 package com.nxpert.CustomerDemo.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.nxpert.CustomerDemo.model.Consultant;
-import com.nxpert.CustomerDemo.model.Customer;
 
 public interface ConsultantService {
 
-	public Page<Consultant> readAll();
+	Page<Consultant> search(Pageable pageable, String searchText);
 
-	public Optional<Consultant> read(int id);
+	Page<Consultant> readAll(Pageable pageable);
 
-	public Consultant create(Consultant consultant);
+	Optional<Consultant> read(Integer id);
 
-	public void delete(int id);
+	Consultant create(Consultant request);
 
-	public Consultant update(Consultant consultant);
+	Consultant update(Consultant request);
 
-	public Page<Consultant> search(String name);
+	void delete(Integer id);
+
+	
 }
