@@ -30,14 +30,16 @@ public class Consultant {
 	@Column(name = "name")
 	String name;
 
-	@ManyToMany(targetEntity = Customer.class, 
+	@ManyToMany(
+			mappedBy = "consultants",
+			targetEntity = Customer.class, 
 			fetch = FetchType.EAGER,
 	        cascade = {CascadeType.MERGE})
 	@JoinTable(name = "customer_consultants", 
-				joinColumns = {
-								@JoinColumn(name = "consultants_id") 
-							  }, inverseJoinColumns = { @JoinColumn(name = "customer_id") }
-			  )
+	joinColumns = {
+					@JoinColumn(name = "consultants_id") 
+				  }, inverseJoinColumns = { @JoinColumn(name = "customer_id") }
+	)
 	List<Customer> customers;
 
 	public List<Customer> getCustomers() {
