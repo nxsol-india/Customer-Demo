@@ -35,7 +35,7 @@ public class Customer {
 			fetch = FetchType.EAGER,
 	        cascade = {CascadeType.MERGE} 
 				)
-	@JoinTable(name = "customerbyconsultants", 
+	@JoinTable(name = "customer_consultants", 
 				joinColumns = {
 								@JoinColumn(name = "customer_id") 
 							  }, inverseJoinColumns = { @JoinColumn(name = "consultants_id") }

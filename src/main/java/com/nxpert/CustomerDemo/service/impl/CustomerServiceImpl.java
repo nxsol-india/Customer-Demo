@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.nxpert.CustomerDemo.model.Customer;
-import com.nxpert.CustomerDemo.repository.CustomerReopository;
+import com.nxpert.CustomerDemo.repository.CustomerRepository;
 import com.nxpert.CustomerDemo.service.CustomerService;
 
 
@@ -16,7 +16,7 @@ import com.nxpert.CustomerDemo.service.CustomerService;
 public class CustomerServiceImpl implements CustomerService{
 
 	@Autowired
-	CustomerReopository reopository;
+	CustomerRepository reopository;
 	
 	@Override
 	public Page<Customer> search(Pageable pageable, String searchText) {
