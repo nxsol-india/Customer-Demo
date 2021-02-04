@@ -33,7 +33,7 @@ public class Consultant {
 	@ManyToMany(targetEntity = Customer.class, 
 			fetch = FetchType.EAGER,
 	        cascade = {CascadeType.MERGE})
-	@JoinTable(name = "customerbyconsultants", 
+	@JoinTable(name = "customer_consultants", 
 				joinColumns = {
 								@JoinColumn(name = "consultants_id") 
 							  }, inverseJoinColumns = { @JoinColumn(name = "customer_id") }

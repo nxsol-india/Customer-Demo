@@ -42,10 +42,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer update(Customer request) {
-		Customer customer = reopository.getOne(request.getId());
-		customer.setName(request.getName());
-		customer.setId(request.getId());
-		return reopository.save(customer);
+		return reopository.save(request);
 	}
 
 	@Override
