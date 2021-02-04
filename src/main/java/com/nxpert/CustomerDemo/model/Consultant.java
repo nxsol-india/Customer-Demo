@@ -31,7 +31,6 @@ public class Consultant {
 	String name;
 
 	@ManyToMany(
-			mappedBy = "consultants",
 			targetEntity = Customer.class, 
 			fetch = FetchType.EAGER,
 	        cascade = {CascadeType.MERGE})
