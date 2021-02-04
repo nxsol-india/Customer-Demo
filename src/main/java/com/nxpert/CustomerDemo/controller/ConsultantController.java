@@ -47,7 +47,10 @@ public class ConsultantController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@RequestBody Consultant request, @PathVariable Integer id) {
+	public ResponseEntity<?> update(@RequestBody Consultant request) {
+		if(null == request.getId()) {
+			return new ResponseEntity<Exception>(new Exception("Invalid Customer"),HttpStatus.BAD_GATEWAY);
+		}
 		return new ResponseEntity<Consultant>(service.update(request), HttpStatus.OK);
 	}
 	

@@ -41,10 +41,7 @@ public class ConsultantServiceImpl implements ConsultantService {
 
 	@Override
 	public Consultant update(Consultant request) {
-		Consultant consultant = reopository.getOne(request.getId());
-		consultant.setName(request.getName());
-		consultant.setId(request.getId());
-		return reopository.save(consultant);
+		return reopository.save(request);
 	}
 
 	@Override

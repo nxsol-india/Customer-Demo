@@ -25,7 +25,7 @@ public class Consultant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true)
-	int id;
+	Integer id;
 
 	@Column(name = "name")
 	String name;
@@ -49,11 +49,11 @@ public class Consultant {
 		this.customers = customers;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
