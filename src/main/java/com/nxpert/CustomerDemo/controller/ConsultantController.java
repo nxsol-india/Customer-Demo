@@ -36,6 +36,11 @@ public class ConsultantController {
 		return service.readAll(pageable);
 	}
 	
+	@GetMapping("readConsultantByCoustomerId/{id}")
+	public Page<Consultant> readConsultantByCoustomerId(Pageable pageable ,@PathVariable Integer id) {
+		return service.readConsultantByCoustomerId(pageable,id);
+	}
+	
 	@GetMapping("/{id}")
 	public Consultant read(@PathVariable Integer id) {
 		return service.read(id).orElse(null);

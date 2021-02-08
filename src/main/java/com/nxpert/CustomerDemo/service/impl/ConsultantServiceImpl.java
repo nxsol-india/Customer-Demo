@@ -1,5 +1,7 @@
 package com.nxpert.CustomerDemo.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,13 @@ public class ConsultantServiceImpl implements ConsultantService {
 	@Override
 	public void delete(Integer id) {
 		reopository.deleteById(id);
+	}
+
+	@Override
+	public Page<Consultant> readConsultantByCoustomerId(Pageable pageable, Integer id) {
+		List<Integer> list=new ArrayList<Integer>();
+		list.add(id);
+		return reopository.readAllByCoustomerId(pageable, list);
 	}
 
 }

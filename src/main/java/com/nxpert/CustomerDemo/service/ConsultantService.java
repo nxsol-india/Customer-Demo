@@ -21,5 +21,7 @@ public interface ConsultantService {
 
 	void delete(Integer id);
 
+	Page<Consultant> readConsultantByCoustomerId(Pageable pageable,Integer id);
+
 	
 }
