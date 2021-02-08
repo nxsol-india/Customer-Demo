@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.JoinColumn;
@@ -40,6 +41,7 @@ public class Customer {
 								@JoinColumn(name = "customer_id") 
 							  }, inverseJoinColumns = { @JoinColumn(name = "consultants_id") }
 			  )
+	@JsonIdentityReference(alwaysAsId = true)
 	List<Consultant> consultants;
 
 

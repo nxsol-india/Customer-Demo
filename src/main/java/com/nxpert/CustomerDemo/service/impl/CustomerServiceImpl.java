@@ -27,7 +27,8 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Override
 	public Page<Customer> readAll(Pageable pageable) {
-		return reopository.findAll(pageable);
+		Page<Customer> customerList=reopository.findAll(pageable);
+		return customerList;
 	}
 	
 	@Override
