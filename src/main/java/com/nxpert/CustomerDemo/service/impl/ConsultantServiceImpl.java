@@ -52,10 +52,8 @@ public class ConsultantServiceImpl implements ConsultantService {
 	}
 
 	@Override
-	public Page<Consultant> readConsultantByCoustomerId(Pageable pageable, Integer id) {
-		List<Integer> list=new ArrayList<Integer>();
-		list.add(id);
-		return reopository.readAllByCoustomerId(pageable, list);
+	public Page<Consultant> readByCoustomerId(Pageable pageable, Integer id) {
+		return reopository.readAllByCustomerId(pageable, id);
 	}
 
 }

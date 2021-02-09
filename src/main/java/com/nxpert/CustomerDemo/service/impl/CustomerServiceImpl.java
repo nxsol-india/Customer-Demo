@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.nxpert.CustomerDemo.model.Consultant;
 import com.nxpert.CustomerDemo.model.Customer;
 import com.nxpert.CustomerDemo.repository.CustomerRepository;
 import com.nxpert.CustomerDemo.service.CustomerService;
@@ -22,6 +23,8 @@ public class CustomerServiceImpl implements CustomerService{
 	public Page<Customer> search(Pageable pageable, String searchText) {
 		// TODO Auto-generated method stub
 		String queriableText = new StringBuilder("%").append(searchText).append("%").toString();
+		
+		Page<Customer> pg=reopository.search(pageable, queriableText);
 		return reopository.search(pageable, queriableText);
 	}
 	
@@ -50,4 +53,12 @@ public class CustomerServiceImpl implements CustomerService{
 	public void delete(Integer id) {
 		reopository.deleteById(id);
 	}
+
+	@Override
+	public Page<Customer> readByConsultantId(Pageable pageable, Integer id) {
+		Page<Customer> pa=reopository.readByConsultantId(pageable,id);
+		return reopository.readByConsultantId(pageable,id) ;
+	}
+
+	
 }

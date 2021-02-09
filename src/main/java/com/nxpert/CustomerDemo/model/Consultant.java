@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "consultant")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id" ,scope = Consultant.class)
 public class Consultant {
 
 	@Id
@@ -35,12 +35,8 @@ public class Consultant {
 	@ManyToMany(
 			targetEntity = Customer.class, 
 			fetch = FetchType.EAGER,
-	        cascade = {CascadeType.MERGE})
-	@JoinTable(name = "customer_consultants", 
-	joinColumns = {
-					@JoinColumn(name = "consultants_id") 
-				  }, inverseJoinColumns = { @JoinColumn(name = "customer_id") }
-	)
+	        cascade = {CascadeType.MERGE} ,mappedBy = "consultants")
+	
 	@JsonIdentityReference(alwaysAsId = true)
 	List<Customer> customers;
 

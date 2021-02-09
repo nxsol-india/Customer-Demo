@@ -15,10 +15,12 @@ import com.nxpert.CustomerDemo.model.Consultant;
 @Repository
 public interface ConsultantRepository extends JpaRepository<Consultant, Integer> {
 
+	
 	@Query(value="SELECT c from Consultant c where lower(c.name) like lower(?1)")
-	Page<Consultant> search(Pageable pageable, String queriableText);
+	Page<Consultant> search(Pageable pageable, String name);
 
-	@Query(value="SELECT  c FROM Consultant c where c.customers IN :id ")
-	Page<Consultant> readAllByCoustomerId(Pageable pageable,@Param("id") Collection<Integer> id);
+	@Query(value="SELECT  * FROM consultant c where c.id IN (\n" + 
+			"SELECT cc.consultants_id FROM  customer_consultants cc where cc.customer_id  = ?1)",nativeQuery = true)
+	Page<Consultant> readAllByCustomerId(Pageable pageable,Integer id);
 
 }

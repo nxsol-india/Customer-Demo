@@ -27,7 +27,8 @@ public class ConsultantController {
 
 
 	@GetMapping("/search")
-	public Page<Consultant> search(Pageable pageable, @RequestParam(name = "searchText", value = "", required = false) String searchText) {
+	public Page<Consultant> search(Pageable pageable, 
+			@RequestParam(name = "searchText", value = "", required = false) String searchText) {
 		return service.search(pageable, searchText);
 	}
 	
@@ -36,9 +37,9 @@ public class ConsultantController {
 		return service.readAll(pageable);
 	}
 	
-	@GetMapping("readConsultantByCoustomerId/{id}")
+	@GetMapping("/readByCoustomerId/{id}")
 	public Page<Consultant> readConsultantByCoustomerId(Pageable pageable ,@PathVariable Integer id) {
-		return service.readConsultantByCoustomerId(pageable,id);
+		return service.readByCoustomerId(pageable,id);
 	}
 	
 	@GetMapping("/{id}")

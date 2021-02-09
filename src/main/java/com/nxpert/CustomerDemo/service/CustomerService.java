@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.nxpert.CustomerDemo.model.Consultant;
 import com.nxpert.CustomerDemo.model.Customer;
 
 public interface CustomerService  {
@@ -20,4 +21,6 @@ public interface CustomerService  {
 	Customer update(Customer request);
 
 	void delete(Integer id);
+
+	Page<Customer> readByConsultantId(Pageable pageable, Integer id);
 }

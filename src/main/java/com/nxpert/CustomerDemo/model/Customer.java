@@ -21,7 +21,7 @@ import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "customer")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id",scope = Customer.class)
 public class Customer {
 
 	@Id
