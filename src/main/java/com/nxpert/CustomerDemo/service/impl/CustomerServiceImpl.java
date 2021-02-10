@@ -12,33 +12,29 @@ import com.nxpert.CustomerDemo.model.Customer;
 import com.nxpert.CustomerDemo.repository.CustomerRepository;
 import com.nxpert.CustomerDemo.service.CustomerService;
 
-
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	CustomerRepository reopository;
-	
+
 	@Override
 	public Page<Customer> search(Pageable pageable, String searchText) {
-		// TODO Auto-generated method stub
 		String queriableText = new StringBuilder("%").append(searchText).append("%").toString();
-		
-		Page<Customer> pg=reopository.search(pageable, queriableText);
 		return reopository.search(pageable, queriableText);
 	}
-	
+
 	@Override
 	public Page<Customer> readAll(Pageable pageable) {
-		Page<Customer> customerList=reopository.findAll(pageable);
+		Page<Customer> customerList = reopository.findAll(pageable);
 		return customerList;
 	}
-	
+
 	@Override
 	public Optional<Customer> read(Integer id) {
 		return reopository.findById(id);
 	}
-	
+
 	@Override
 	public Customer create(Customer request) {
 		return reopository.save(request);
@@ -56,9 +52,8 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Page<Customer> readByConsultantId(Pageable pageable, Integer id) {
-		Page<Customer> pa=reopository.readByConsultantId(pageable,id);
-		return reopository.readByConsultantId(pageable,id) ;
+		Page<Customer> pa = reopository.readByConsultantId(pageable, id);
+		return reopository.readByConsultantId(pageable, id);
 	}
 
-	
 }

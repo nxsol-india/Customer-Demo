@@ -34,7 +34,7 @@ public class Customer {
 
 	@ManyToMany(targetEntity = Consultant.class, 
 			fetch = FetchType.EAGER,
-	        cascade = {CascadeType.MERGE} 
+	        cascade = {CascadeType.MERGE}
 				)
 	@JoinTable(name = "customer_consultants", 
 				joinColumns = {
