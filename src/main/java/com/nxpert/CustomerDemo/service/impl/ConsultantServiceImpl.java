@@ -1,16 +1,13 @@
 package com.nxpert.CustomerDemo.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.nxpert.CustomerDemo.model.Consultant;
-import com.nxpert.CustomerDemo.model.Customer;
 import com.nxpert.CustomerDemo.repository.ConsultantRepository;
 import com.nxpert.CustomerDemo.service.ConsultantService;
 
@@ -18,44 +15,43 @@ import com.nxpert.CustomerDemo.service.ConsultantService;
 public class ConsultantServiceImpl implements ConsultantService {
 
 	@Autowired
-	ConsultantRepository dao;
+	ConsultantRepository reopository;
 
 	@Override
-	public Page<Consultant> readAll() {
-		Pageable paging = PageRequest.of(0, 1);
-
-		Page<Consultant> listOfConsulatant = dao.findAll(paging);
-		return listOfConsulatant;
+	public Page<Consultant> search(Pageable pageable, String searchText) {
+		// TODO Auto-generated method stub
+		String queriableText = new StringBuilder("%").append(searchText).append("%").toString();
+		return reopository.search(pageable, queriableText);
+	}
+	
+	@Override
+	public Page<Consultant> readAll(Pageable pageable) {
+		return reopository.findAll(pageable);
+	}
+	
+	@Override
+	public Optional<Consultant> read(Integer id) {
+		return reopository.findById(id);
+	}
+	
+	@Override
+	public Consultant create(Consultant request) {
+		return reopository.save(request);
 	}
 
 	@Override
-	public Optional<Consultant> read(int id) {
-		return dao.findById(id);
+	public Consultant update(Consultant request) {
+		return reopository.saveAndFlush(request);
 	}
 
 	@Override
-	public Consultant create(Consultant consultant) {
-		return dao.save(consultant);
+	public void delete(Integer id) {
+		reopository.deleteById(id);
 	}
 
 	@Override
-	public void delete(int id) {
-		dao.deleteById(id);
+	public Page<Consultant> readByCoustomerId(Pageable pageable, Integer id) {
+		return reopository.readAllByCustomerId(pageable, id);
 	}
-
-	@Override
-	public Consultant update(Consultant consultant) {
-		Consultant cons = dao.getOne(consultant.getId());
-		cons.setName(consultant.getName());
-		cons.setId(consultant.getId());
-		return dao.save(cons);
-	}
-
-	@Override
-	public Page<Consultant> search(String name) {
-		Pageable paging = PageRequest.of(0, 1);
-		return dao.search(name,paging);
-	}
-
 
 }

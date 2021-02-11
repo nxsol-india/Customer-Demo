@@ -8,33 +8,32 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.nxpert.CustomerDemo.model.Customer;
-import com.nxpert.CustomerDemo.repository.CustomerReopository;
+import com.nxpert.CustomerDemo.repository.CustomerRepository;
 import com.nxpert.CustomerDemo.service.CustomerService;
 
-
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
-	CustomerReopository reopository;
-	
+	CustomerRepository reopository;
+
 	@Override
 	public Page<Customer> search(Pageable pageable, String searchText) {
-		// TODO Auto-generated method stub
 		String queriableText = new StringBuilder("%").append(searchText).append("%").toString();
 		return reopository.search(pageable, queriableText);
 	}
-	
+
 	@Override
 	public Page<Customer> readAll(Pageable pageable) {
-		return reopository.findAll(pageable);
+		Page<Customer> customerList = reopository.findAll(pageable);
+		return customerList;
 	}
-	
+
 	@Override
 	public Optional<Customer> read(Integer id) {
 		return reopository.findById(id);
 	}
-	
+
 	@Override
 	public Customer create(Customer request) {
 		return reopository.save(request);
@@ -42,14 +41,18 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer update(Customer request) {
-		Customer customer = reopository.getOne(request.getId());
-		customer.setName(request.getName());
-		customer.setId(request.getId());
-		return reopository.save(customer);
+		return reopository.saveAndFlush(request);
 	}
 
 	@Override
 	public void delete(Integer id) {
 		reopository.deleteById(id);
 	}
+
+	@Override
+	public Page<Customer> readByConsultantId(Pageable pageable, Integer id) {
+		Page<Customer> pa = reopository.readByConsultantId(pageable, id);
+		return reopository.readByConsultantId(pageable, id);
+	}
+
 }

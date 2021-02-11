@@ -1,16 +1,20 @@
 package com.nxpert.CustomerDemo.controller;
 
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.nxpert.CustomerDemo.model.Consultant;
 import com.nxpert.CustomerDemo.service.ConsultantService;
 
@@ -19,37 +23,47 @@ import com.nxpert.CustomerDemo.service.ConsultantService;
 public class ConsultantController {
 
 	@Autowired
-	ConsultantService consultantService;
+	ConsultantService service;
+
 
 	@GetMapping("/search")
-	public Page<Consultant> search(@RequestParam("name") String name) {
-		return consultantService.search(name);
+	public Page<Consultant> search(Pageable pageable, 
+			@RequestParam(name = "searchText", value = "", required = false) String searchText) {
+		return service.search(pageable, searchText);
 	}
 	
-	@GetMapping("/readAll")
-	public Page<Consultant> readAll() {
-		return consultantService.readAll();
+	@GetMapping("")
+	public Page<Consultant> readAll(Pageable pageable) {
+		return service.readAll(pageable);
+	}
+	
+	@GetMapping("/readByCoustomerId/{id}")
+	public Page<Consultant> readConsultantByCoustomerId(Pageable pageable ,@PathVariable Integer id) {
+		return service.readByCoustomerId(pageable,id);
+	}
+	
+	@GetMapping("/{id}")
+	public Consultant read(@PathVariable Integer id) {
+		return service.read(id).orElse(null);
 	}
 
-	@GetMapping("/read")
-	public Optional<Consultant> read(@RequestParam("id") int id) {
-		return consultantService.read(id);
+	@PostMapping("")
+	public ResponseEntity<?> create(@RequestBody Consultant request) {
+		return new ResponseEntity<Consultant>(service.create(request), HttpStatus.CREATED);
 	}
 
-	@PostMapping("/create")
-	public Consultant create(@RequestBody Consultant consultant) {
-		return consultantService.create(consultant);
+	@PutMapping("")
+	public ResponseEntity<?> update(@RequestBody Consultant request) {
+		if(null == request.getId()) {
+			return new ResponseEntity<Exception>(new Exception("Invalid Customer"),HttpStatus.BAD_GATEWAY);
+		}
+		return new ResponseEntity<Consultant>(service.update(request), HttpStatus.OK);
 	}
-
-	@DeleteMapping("/delete")
-	public String create(@RequestParam("id") int id) {
-		consultantService.delete(id);
-		return "data is deleted from database";
-	}
-
-	@PutMapping("/update")
-	public Consultant update(@RequestBody Consultant consultant) {
-		return consultantService.update(consultant);
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }

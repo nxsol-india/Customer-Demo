@@ -1,6 +1,7 @@
 package com.nxpert.CustomerDemo.model;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -16,35 +19,39 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "consultant")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id" ,scope = Consultant.class)
 public class Consultant {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true)
-	int id;
+	Integer id;
 
 	@Column(name = "name")
 	String name;
 
-	@ManyToMany(targetEntity = Customer.class, 
-				cascade = CascadeType.ALL,
-				mappedBy = "consultants")
-	List<Customer> customers;
+	@ManyToMany(cascade = {CascadeType.MERGE})
+	@JoinTable(name = "customer_consultants", 
+	joinColumns = {
+					@JoinColumn(name = "consultants_id") 
+				  }, inverseJoinColumns = { @JoinColumn(name = "customer_id") }
+  )
+	Set<Customer> customers = new HashSet<Customer>();
 
-	public List<Customer> getCustomers() {
+	
+	public Set<Customer> getCustomers() {
 		return customers;
 	}
 
-	public void setCustomers(List<Customer> customers) {
+	public void setCustomers(Set<Customer> customers) {
 		this.customers = customers;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
