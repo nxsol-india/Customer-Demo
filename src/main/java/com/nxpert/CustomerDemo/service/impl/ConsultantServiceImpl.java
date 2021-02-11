@@ -1,7 +1,5 @@
 package com.nxpert.CustomerDemo.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +41,7 @@ public class ConsultantServiceImpl implements ConsultantService {
 
 	@Override
 	public Consultant update(Consultant request) {
-		return reopository.save(request);
+		return reopository.saveAndFlush(request);
 	}
 
 	@Override

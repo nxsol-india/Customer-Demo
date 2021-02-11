@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.nxpert.CustomerDemo.model.Consultant;
 import com.nxpert.CustomerDemo.model.Customer;
 import com.nxpert.CustomerDemo.repository.CustomerRepository;
 import com.nxpert.CustomerDemo.service.CustomerService;
@@ -42,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer update(Customer request) {
-		return reopository.save(request);
+		return reopository.saveAndFlush(request);
 	}
 
 	@Override
