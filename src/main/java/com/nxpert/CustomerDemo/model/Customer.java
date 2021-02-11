@@ -36,7 +36,7 @@ public class Customer {
 	@Column(name = "name")
 	String name;
 	
-	@ManyToMany
+	@ManyToMany 
 	@JoinTable(name = "customer_consultants", 
 				joinColumns = {
 								@JoinColumn(name = "customer_id") 
