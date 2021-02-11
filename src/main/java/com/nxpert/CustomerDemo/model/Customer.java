@@ -1,6 +1,9 @@
 package com.nxpert.CustomerDemo.model;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +18,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.JoinColumn;
@@ -31,25 +35,20 @@ public class Customer {
 
 	@Column(name = "name")
 	String name;
-
-	@ManyToMany(targetEntity = Consultant.class, 
-			fetch = FetchType.EAGER,
-	        cascade = {CascadeType.MERGE}
-				)
+	
+	@ManyToMany
 	@JoinTable(name = "customer_consultants", 
 				joinColumns = {
 								@JoinColumn(name = "customer_id") 
 							  }, inverseJoinColumns = { @JoinColumn(name = "consultants_id") }
 			  )
-	@JsonIdentityReference(alwaysAsId = true)
-	List<Consultant> consultants;
-
-
-	public List<Consultant> getConsultants() {
+	Set<Consultant> consultants = new HashSet<Consultant>();
+	
+	public Set<Consultant> getConsultants() {
 		return consultants;
 	}
 
-	public void setConsultants(List<Consultant> consultants) {
+	public void setConsultants(Set<Consultant> consultants) {
 		this.consultants = consultants;
 	}
 
