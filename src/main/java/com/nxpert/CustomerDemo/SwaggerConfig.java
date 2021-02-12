@@ -89,7 +89,7 @@ public class SwaggerConfig {
 								.modelRef(new ModelRef("string"))
 								.parameterType("header")
 								.required(false)
-								.build()));
+								.build())); 
 	}
 	*/
 	
