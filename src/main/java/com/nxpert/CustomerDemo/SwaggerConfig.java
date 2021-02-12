@@ -74,7 +74,7 @@ public class SwaggerConfig {
 	public void setSort(String sort) {
 		this.sort = sort;
 	}
-	
+	 
 	/*
 	@Bean
 	public Docket productApi() {
