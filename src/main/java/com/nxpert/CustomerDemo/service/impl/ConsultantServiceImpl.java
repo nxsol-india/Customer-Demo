@@ -1,5 +1,6 @@
 package com.nxpert.CustomerDemo.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,11 @@ public class ConsultantServiceImpl implements ConsultantService {
 	@Override
 	public Page<Consultant> readByCoustomerId(Pageable pageable, Integer id) {
 		return reopository.readAllByCustomerId(pageable, id);
+	}
+
+	@Override
+	public List<Consultant> readAll() {
+		return reopository.findAll();
 	}
 
 }

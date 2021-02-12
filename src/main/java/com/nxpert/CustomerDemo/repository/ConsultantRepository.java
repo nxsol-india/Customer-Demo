@@ -18,5 +18,4 @@ public interface ConsultantRepository extends JpaRepository<Consultant, Integer>
 	@Query(value="SELECT  * FROM consultant c where c.id IN (" + 
 			"SELECT cc.consultants_id FROM  customer_consultants cc where cc.customer_id  = ?1)",nativeQuery = true)
 	Page<Consultant> readAllByCustomerId(Pageable pageable,Integer id);
-
 }

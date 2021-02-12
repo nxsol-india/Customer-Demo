@@ -1,5 +1,7 @@
 package com.nxpert.CustomerDemo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +37,11 @@ public class ConsultantController {
 	@GetMapping("")
 	public Page<Consultant> readAll(Pageable pageable) {
 		return service.readAll(pageable);
+	}
+	
+	@GetMapping("/readAll")
+	public List<Consultant> readAll() {
+		return service.readAll();
 	}
 	
 	//@GetMapping("/readByCoustomerId/{id}")
