@@ -37,6 +37,7 @@ public class Customer {
 			  )
 	Set<Consultant> consultants = new HashSet<Consultant>();
 	
+	
 	public Set<Consultant> getConsultants() {
 		return consultants;
 	}

@@ -36,7 +36,6 @@ public class Consultant {
 				  }, inverseJoinColumns = { @JoinColumn(name = "customer_id") }
   )
 	Set<Customer> customers = new HashSet<Customer>();
-
 	
 	public Set<Customer> getCustomers() {
 		return customers;
