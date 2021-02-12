@@ -30,7 +30,7 @@ public class Consultant {
 	@Column(name = "name")
 	String name;
 
-	@ManyToMany(cascade = {CascadeType.MERGE})
+	@ManyToMany
 	@JoinTable(name = "customer_consultants", 
 	joinColumns = {
 					@JoinColumn(name = "consultants_id") 
