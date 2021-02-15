@@ -49,10 +49,4 @@ public class CustomerServiceImpl implements CustomerService {
 		reopository.deleteById(id);
 	}
 
-	@Override
-	public Page<Customer> readByConsultantId(Pageable pageable, Integer id) {
-		Page<Customer> pa = reopository.readByConsultantId(pageable, id);
-		return reopository.readByConsultantId(pageable, id);
-	}
-
 }

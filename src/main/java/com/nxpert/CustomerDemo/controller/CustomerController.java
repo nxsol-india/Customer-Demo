@@ -31,27 +31,22 @@ public class CustomerController {
 		return service.search(pageable, searchText);
 	}
 
-	@GetMapping("")
+	@GetMapping
 	public Page<Customer> readAll(Pageable pageable) {
 		return service.readAll(pageable);
 	}
 	
-	//@GetMapping("/readByConsultantId/{id}")
-	public Page<Customer> readConsultantByCoustomerId(Pageable pageable ,@PathVariable Integer id) {
-		return service.readByConsultantId(pageable,id);
-	}
-
 	@GetMapping("/{id}")
 	public Customer read(@PathVariable Integer id) {
 		return service.read(id).orElse(null);
 	}
 
-	@PostMapping("")
+	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Customer request) {
 		return new ResponseEntity<Customer>(service.create(request), HttpStatus.CREATED);
 	}
 
-	@PutMapping("")
+	@PutMapping
 	public ResponseEntity<?> update(@RequestBody Customer request) {
 		if (null == request.getId()) {
 			return new ResponseEntity<Exception>(new Exception("Invalid Customer"), HttpStatus.BAD_GATEWAY);
